@@ -59,9 +59,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "Once a provincial Mauryan fortified capital of Kalinga. Famous for the stone-cut edicts in Prakrit of the emperor Ashoka.",
     ai_summary: "Jaugada is a ruined fortress in Odisha. It lies 35 km from Brahmapur. Despite historical descriptions of fortification towers and moats, the remains are difficult to visualize today. It is near the great Shiva temple Kaleswar & Rameswar.",
     image_urls: [
-      "https://upload.wikimedia.org/wikipedia/commons/2/2f/Jaugada_Rock_Inscription_of_Ashoka.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/5/52/Jaugada_2018.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/0/07/Jaugada_rock_with_Ashoka_Major_Rock_Edict.jpg"
+      "/images/jaugada_1.jpg",
+      "/images/jaugada_2.jpg",
+      "/images/jaugada_3.jpg"
     ],
     index_score: 85,
     nearby_places: []
@@ -82,9 +82,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "This defensive settlement originated prior to the Mauryan empire and had an ancient population of 20,000 to 25,000.",
     ai_summary: "The remains of the ancient city Sisupalgarh have been discovered near Bhubaneswar. On the basis of architectural patterns, historians claim it flourished between the 5th century BC and 4th century AD.",
     image_urls: [
-      "https://upload.wikimedia.org/wikipedia/commons/a/af/Sisupalagada_Bhubaneswar.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/9/90/Sisupalgarh_fortified_urban_center.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/c/c5/Ancient_remains_inside_rampart_of_Sisupalgarh_-_6.JPG"
+      "/images/sisupalgarh_1.jpg",
+      "/images/sisupalgarh_2.jpg",
+      "/images/sisupalgarh_3.jpg"
     ],
     index_score: 92,
     nearby_places: []
@@ -105,9 +105,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "Built on the site where the famous Kalinga War was fought, commemorating Ashoka's mission of peace.",
     ai_summary: "The Dhauli Shanti Stupa (Peace Pagoda) was built by the Japan Buddha Sangha in 1972. It is built on the site of the bloodiest war in Indian history, the Kalinga War, which ended with a successful mission of peace.",
     image_urls: [
-      "https://upload.wikimedia.org/wikipedia/commons/5/5e/Historical_landmark_in_Dhauli_Shanti_Stupa_4.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/0/05/Dhauli_Shanti_Stupa%2C_Bhubaneswar.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/d/da/Dhauli_shanti_stupa.jpg"
+      "/images/dhauli_1.jpg",
+      "/images/dhauli_2.jpg",
+      "/images/dhauli_3.jpg"
     ],
     index_score: 88,
     nearby_places: []
@@ -128,9 +128,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "A major pilgrimage site located on seven hills, dedicated to the Goddess Saptashrungi Nivasini.",
     ai_summary: "Saptashrungi is a site of Hindu pilgrimage situated 60 kilometers from Nashik. According to Hindu traditions, the goddess Saptashrungi Nivasini dwells within the seven mountain peaks. It is a highly revered Shakti Peetha.",
     image_urls: [
-      "https://upload.wikimedia.org/wikipedia/commons/8/85/Saptashrungi_Devi_Temple.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/1/1d/Funicular_Train_at_Saptashrungi_Gad.jpg",
-      "https://upload.wikimedia.org/wikipedia/commons/4/4b/Saptashrungi_Temple_at_Night.jpg"
+      "/images/saptashrungi_1.jpg",
+      "/images/saptashrungi_2.jpg",
+      "/images/saptashrungi_3.jpg"
     ],
     index_score: 82,
     nearby_places: []
