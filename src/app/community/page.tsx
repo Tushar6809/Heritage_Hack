@@ -7,6 +7,7 @@ import Link from 'next/link';
 
 export default function CommunityPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   return (
     <>
@@ -57,11 +58,22 @@ export default function CommunityPage() {
 
                 <div className="space-y-4">
                   <label className="text-sm font-bold text-foreground/80">Photos / Evidence</label>
-                  <div className="border-2 border-dashed border-surface-hover rounded-xl p-8 text-center hover:border-accent hover:bg-surface-hover transition-colors cursor-pointer">
-                    <Upload className="h-8 w-8 mx-auto mb-3 text-foreground/40" />
-                    <p className="font-bold text-foreground/80">Click to upload photos</p>
-                    <p className="text-xs text-foreground/50 mt-1">PNG, JPG up to 10MB</p>
-                  </div>
+                  <label className="block border-2 border-dashed border-surface-hover rounded-xl p-8 text-center hover:border-accent hover:bg-surface-hover transition-colors cursor-pointer">
+                    <input type="file" accept="image/*" className="hidden" onChange={(e) => setSelectedFile(e.target.files?.[0] || null)} />
+                    {selectedFile ? (
+                      <div className="text-accent flex flex-col items-center">
+                        <CheckCircle className="h-8 w-8 mx-auto mb-3" />
+                        <p className="font-bold">{selectedFile.name}</p>
+                        <p className="text-xs mt-1">Ready to submit</p>
+                      </div>
+                    ) : (
+                      <>
+                        <Upload className="h-8 w-8 mx-auto mb-3 text-foreground/40" />
+                        <p className="font-bold text-foreground/80">Click to upload photos</p>
+                        <p className="text-xs text-foreground/50 mt-1">PNG, JPG up to 10MB</p>
+                      </>
+                    )}
+                  </label>
                 </div>
 
                 <div className="pt-6">
