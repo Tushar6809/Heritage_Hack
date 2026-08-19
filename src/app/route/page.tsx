@@ -32,8 +32,11 @@ export default function RoutePlannerPage() {
 
     if (filtered.length === 0) filtered = [...MOCK_SITES]; // Fallback
 
-    // Take up to 3 sites to form a route
-    const selected = filtered.slice(0, 3);
+    // Shuffle the array so routes feel dynamic and different
+    const shuffled = filtered.sort(() => 0.5 - Math.random());
+
+    // Take up to 5 sites to form a route
+    const selected = shuffled.slice(0, 5);
     setRouteSites(selected);
 
     // Calculate real distances between the selected sites

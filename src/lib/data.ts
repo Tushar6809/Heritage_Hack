@@ -134,6 +134,75 @@ export const MOCK_SITES: Site[] = [
     ],
     index_score: 82,
     nearby_places: []
+  },
+  {
+    id: "5",
+    name: "Leaning Temple of Huma",
+    region: "Sambalpur, Odisha",
+    lat: 21.2722,
+    lng: 83.8961,
+    category: "temple",
+    terrain_type: "watery",
+    risk_level: "yellow",
+    verification_status: "officially_verified",
+    risk_factors: { structural: "orange", environmental: "yellow", tourism_pressure: "green" },
+    best_time: "October - March",
+    duration: "1-2 hours",
+    culture_notes: "Dedicated to Lord Bimaleshwar (Shiva), it is one of the world's rare leaning structures, featuring a stable tilt that has remained unchanged for generations.",
+    ai_summary: "Located on the banks of the Mahanadi River, the Leaning Temple of Huma is a unique architectural marvel. The structural tilt is profound, yet the temple has remained stable for centuries.",
+    image_urls: [
+      "/images/huma_1.jpg",
+      "/images/huma_2.jpg",
+      "/images/huma_3.jpg"
+    ],
+    index_score: 89,
+    nearby_places: []
+  },
+  {
+    id: "6",
+    name: "Samleswari Temple",
+    region: "Sambalpur, Odisha",
+    lat: 21.4688,
+    lng: 83.9744,
+    category: "temple",
+    terrain_type: "generic",
+    risk_level: "green",
+    verification_status: "community_verified",
+    risk_factors: { structural: "green", environmental: "green", tourism_pressure: "orange" },
+    best_time: "September - March",
+    duration: "2-3 hours",
+    culture_notes: "Dedicated to Goddess Samaleswari (Mother of the Universe). She is the most revered deity in western Odisha after Lord Jagannath.",
+    ai_summary: "Situated on the banks of the Mahanadi River, this temple holds profound religious significance across western Odisha and Chhattisgarh. The architecture and spiritual ambiance attract thousands of devotees.",
+    image_urls: [
+      "/images/samleswari_1.jpg",
+      "/images/samleswari_2.jpg",
+      "/images/samleswari_3.jpg"
+    ],
+    index_score: 95,
+    nearby_places: []
+  },
+  {
+    id: "7",
+    name: "Hirakud Dam",
+    region: "Sambalpur, Odisha",
+    lat: 21.5294,
+    lng: 83.8741,
+    category: "water",
+    terrain_type: "watery",
+    risk_level: "yellow",
+    verification_status: "officially_verified",
+    risk_factors: { structural: "yellow", environmental: "orange", tourism_pressure: "green" },
+    best_time: "Monsoon (July - September) or Winter",
+    duration: "3-4 hours",
+    culture_notes: "The world's longest earthen dam, built across the Mahanadi River in 1957. A major multipurpose project for flood control and irrigation.",
+    ai_summary: "A monumental engineering achievement of modern India. The views from the Gandhi Minar and Nehru Minar towers are spectacular, especially during the monsoon when the reservoir is full.",
+    image_urls: [
+      "/images/hirakud_1.jpg",
+      "/images/hirakud_2.jpg",
+      "/images/hirakud_3.jpg"
+    ],
+    index_score: 91,
+    nearby_places: []
   }
 ];
 
