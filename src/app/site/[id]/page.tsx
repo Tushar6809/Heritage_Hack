@@ -1,8 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Header } from '@/components/Header';
 import { MOCK_SITES, MOCK_REVIEWS, type Site } from '@/lib/data';
-import { MapPin, Navigation, BookOpen, ShieldCheck, AlertTriangle, Calendar, Clock, Compass, Share, Bookmark, Users, Info } from 'lucide-react';
+import { MapPin, Navigation, BookOpen, ShieldCheck, AlertTriangle, Calendar, Clock, Compass, Users, Info } from 'lucide-react';
 import { MapWrapper } from '@/components/MapWrapper';
+import { SiteActionButtons } from '@/components/SiteActionButtons';
 import Link from 'next/link';
 
 export default async function SitePage({ params }: { params: Promise<{ id: string }> }) {
@@ -78,17 +79,7 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-wrap gap-4 pt-2">
-                <Link href={`/route?destination=${site.id}`} className="flex items-center gap-2 bg-accent text-background px-6 py-3 rounded-full font-bold transition hover:scale-105">
-                  <Navigation className="h-4 w-4" /> Start Route
-                </Link>
-                <button className="flex items-center gap-2 bg-surface border border-surface-hover text-foreground px-6 py-3 rounded-full font-bold transition hover:bg-surface-hover">
-                  <Bookmark className="h-4 w-4" /> Save
-                </button>
-                <button className="flex items-center gap-2 bg-surface border border-surface-hover text-foreground px-6 py-3 rounded-full font-bold transition hover:bg-surface-hover">
-                  <Share className="h-4 w-4" /> Share
-                </button>
-              </div>
+              <SiteActionButtons siteId={site.id} />
 
               {/* About & Info Provenance */}
               <div className="pt-6 border-t border-surface-hover">
@@ -127,7 +118,7 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
             {/* Risk Breakdown */}
             <div className="rounded-[2rem] bg-surface p-6 md:p-8 border border-surface-hover shadow-xl">
               <h3 className="flex items-center gap-2 font-bold text-lg mb-6">
-                <AlertTriangle className="h-5 w-5 text-foreground/60" /> Preservation Risk
+                <AlertTriangle className="h-5 w-5 text-foreground/60" /> Safety Score
               </h3>
               <div className="flex items-center justify-between mb-6 pb-6 border-b border-surface-hover">
                 <span className="text-foreground/80">Overall Status</span>
