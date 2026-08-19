@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { Site } from '@/lib/data';
@@ -93,7 +93,7 @@ export default function Map({ sites, center, zoom = 6, activeSiteId, userLocatio
         <ChangeView center={center} zoom={zoom} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png" // Light theme map tiles
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {sites.map((site) => (
           <Marker
@@ -122,6 +122,15 @@ export default function Map({ sites, center, zoom = 6, activeSiteId, userLocatio
               <div className="font-bold text-foreground">You are here</div>
             </Popup>
           </Marker>
+        )}
+        {userLocation && activeSiteId && (
+          <Polyline 
+            positions={[
+              userLocation,
+              [sites.find(s => s.id === activeSiteId)?.lat || 0, sites.find(s => s.id === activeSiteId)?.lng || 0]
+            ]} 
+            pathOptions={{ color: '#3b82f6', dashArray: '10, 10', weight: 4, lineCap: 'round', opacity: 0.8 }} 
+          />
         )}
       </MapContainer>
     </div>
