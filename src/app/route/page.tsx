@@ -23,29 +23,52 @@ export default function RoutePlannerPage() {
   };
 
   const generateRoute = () => {
-    // Filter by preferences
+    // 1. Fuzzy match typed locations to actual sites
+    const findSite = (query: string) => {
+      const q = query.toLowerCase();
+      if (!q || q === 'my location') return null;
+      return MOCK_SITES.find(s => s.name.toLowerCase().includes(q) || s.region.toLowerCase().includes(q));
+    };
+
+    const startSite = findSite(startLoc);
+    const endSite = findSite(endLoc);
+
+    // 2. Filter remaining sites
     let filtered = MOCK_SITES.filter(site => {
+      if (startSite && site.id === startSite.id) return false;
+      if (endSite && site.id === endSite.id) return false;
+      
       if (preferences.history && (site.category === 'monument' || site.category === 'settlement')) return true;
       if (preferences.temple && site.category === 'temple') return true;
+      if (site.category === 'water') return true;
       return false;
     });
 
-    if (filtered.length === 0) filtered = [...MOCK_SITES]; // Fallback
+    if (filtered.length === 0) {
+      filtered = MOCK_SITES.filter(s => s.id !== startSite?.id && s.id !== endSite?.id);
+    }
 
-    // Shuffle the array so routes feel dynamic and different
+    // 3. Shuffle
     const shuffled = filtered.sort(() => 0.5 - Math.random());
 
-    // Take up to 5 sites to form a route
-    const selected = shuffled.slice(0, 5);
+    // 4. Construct route array
+    let selected: Site[] = [];
+    if (startSite) selected.push(startSite);
+    selected = [...selected, ...shuffled.slice(0, 3)];
+    if (endSite) selected.push(endSite);
+
+    if (selected.length === 0) selected = shuffled.slice(0, 5); // ultimate fallback
+
     setRouteSites(selected);
 
-    // Calculate real distances between the selected sites
+    // Calculate real distances
     let dist = 0;
     for (let i = 0; i < selected.length - 1; i++) {
       dist += getDistance(selected[i].lat, selected[i].lng, selected[i+1].lat, selected[i+1].lng);
     }
-    // Add some padding for the start/end points (mocked)
-    setTotalDist(dist + 20);
+    
+    // Add 15km buffer for local city traversal
+    setTotalDist(dist + 15);
     setStep(2);
   };
 
@@ -130,55 +153,35 @@ export default function RoutePlannerPage() {
               {/* Timeline */}
               <div className="max-w-2xl mx-auto space-y-6 relative before:absolute before:inset-0 before:ml-[28px] before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-surface before:via-surface-hover before:to-surface">
                 
-                {/* Start */}
-                <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full border-4 border-background bg-surface text-foreground shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 font-bold text-xl">
-                    🏁
-                  </div>
-                  <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-surface-hover bg-background">
-                    <h3 className="font-bold text-lg">{startLoc}</h3>
-                    <p className="text-sm text-foreground/60">Start point</p>
-                  </div>
-                </div>
-
-                <div className="text-center text-sm font-bold text-accent/80 py-2">↓ ~10 km</div>
-
                 {/* Dynamic Stops */}
                 {routeSites.map((site, index) => {
-                  let nextDist = 10; // Default dist to end
+                  let nextDist = 10;
                   if (index < routeSites.length - 1) {
                     nextDist = getDistance(site.lat, site.lng, routeSites[index+1].lat, routeSites[index+1].lng);
                   }
 
-                  const emoji = site.category === 'temple' ? '🛕' : '🏛️';
+                  const isStart = index === 0;
+                  const isEnd = index === routeSites.length - 1;
+                  const emoji = site.category === 'temple' ? '🛕' : (site.category === 'water' ? '💧' : '🏛️');
 
                   return (
                     <div key={site.id}>
                       <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                        <div className="flex items-center justify-center w-14 h-14 rounded-full border-4 border-background bg-accent/20 text-accent shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 font-bold text-xl">
-                          {emoji}
+                        <div className={`flex items-center justify-center w-14 h-14 rounded-full border-4 border-background ${isStart || isEnd ? 'bg-surface text-foreground shadow' : 'bg-accent/20 text-accent shadow'} shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 font-bold text-xl`}>
+                          {isStart ? '🏁' : (isEnd ? '🎯' : emoji)}
                         </div>
-                        <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-accent/20 bg-surface shadow-lg">
+                        <div className={`w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border ${isStart || isEnd ? 'border-surface-hover bg-background' : 'border-accent/20 bg-surface shadow-lg'}`}>
                           <h3 className="font-bold text-lg">{site.name}</h3>
-                          <p className="text-sm text-foreground/60 mb-2">Heritage Site</p>
+                          <p className="text-sm text-foreground/60 mb-2">{isStart ? 'Start Point' : (isEnd ? 'Destination' : 'Heritage Stop')}</p>
                           <Link href={`/site/${site.id}`} className="text-xs font-bold text-accent hover:underline">View details &rarr;</Link>
                         </div>
                       </div>
-                      <div className="text-center text-sm font-bold text-accent/80 py-2">↓ {nextDist.toFixed(1)} km</div>
+                      {index < routeSites.length - 1 && (
+                        <div className="text-center text-sm font-bold text-accent/80 py-2">↓ {nextDist.toFixed(1)} km</div>
+                      )}
                     </div>
                   );
                 })}
-
-                {/* End */}
-                <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active">
-                  <div className="flex items-center justify-center w-14 h-14 rounded-full border-4 border-background bg-surface text-foreground shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 font-bold text-xl">
-                    🏁
-                  </div>
-                  <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-surface-hover bg-background">
-                    <h3 className="font-bold text-lg">{endLoc}</h3>
-                    <p className="text-sm text-foreground/60">Destination Reached</p>
-                  </div>
-                </div>
 
               </div>
             </div>
