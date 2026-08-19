@@ -59,9 +59,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "Once a provincial Mauryan fortified capital of Kalinga. Famous for the stone-cut edicts in Prakrit of the emperor Ashoka.",
     ai_summary: "Jaugada is a ruined fortress in Odisha. It lies 35 km from Brahmapur. Despite historical descriptions of fortification towers and moats, the remains are difficult to visualize today. It is near the great Shiva temple Kaleswar & Rameswar.",
     image_urls: [
-      "/images/jaugada_1.jpg",
-      "/images/jaugada_2.jpg",
-      "/images/jaugada_3.jpg"
+      "/images/jaugada_1.jpeg",
+      "/images/jaugada_2.jpeg",
+      "/images/jaugada_1.jpeg"
     ],
     index_score: 85,
     nearby_places: []
@@ -82,9 +82,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "This defensive settlement originated prior to the Mauryan empire and had an ancient population of 20,000 to 25,000.",
     ai_summary: "The remains of the ancient city Sisupalgarh have been discovered near Bhubaneswar. On the basis of architectural patterns, historians claim it flourished between the 5th century BC and 4th century AD.",
     image_urls: [
-      "/images/sisupalgarh_1.jpg",
-      "/images/sisupalgarh_2.jpg",
-      "/images/sisupalgarh_3.jpg"
+      "/images/sisupalgarh_1.jpeg",
+      "/images/sisupalgarh_2.jpeg",
+      "/images/sisupalgarh_1.jpeg"
     ],
     index_score: 92,
     nearby_places: []
@@ -105,9 +105,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "Built on the site where the famous Kalinga War was fought, commemorating Ashoka's mission of peace.",
     ai_summary: "The Dhauli Shanti Stupa (Peace Pagoda) was built by the Japan Buddha Sangha in 1972. It is built on the site of the bloodiest war in Indian history, the Kalinga War, which ended with a successful mission of peace.",
     image_urls: [
-      "/images/dhauli_1.jpg",
-      "/images/dhauli_2.jpg",
-      "/images/dhauli_3.jpg"
+      "/images/dhauli_1.jpeg",
+      "/images/dhauli_2.jpeg",
+      "/images/dhauli_1.jpeg"
     ],
     index_score: 88,
     nearby_places: []
@@ -128,9 +128,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "A major pilgrimage site located on seven hills, dedicated to the Goddess Saptashrungi Nivasini.",
     ai_summary: "Saptashrungi is a site of Hindu pilgrimage situated 60 kilometers from Nashik. According to Hindu traditions, the goddess Saptashrungi Nivasini dwells within the seven mountain peaks. It is a highly revered Shakti Peetha.",
     image_urls: [
-      "/images/saptashrungi_1.jpg",
-      "/images/saptashrungi_2.jpg",
-      "/images/saptashrungi_3.jpg"
+      "/images/saptashrungi_1.jpeg",
+      "/images/saptashrungi_2.jpeg",
+      "/images/saptashrungi_1.jpeg"
     ],
     index_score: 82,
     nearby_places: []
@@ -151,9 +151,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "Dedicated to Lord Bimaleshwar (Shiva), it is one of the world's rare leaning structures, featuring a stable tilt that has remained unchanged for generations.",
     ai_summary: "Located on the banks of the Mahanadi River, the Leaning Temple of Huma is a unique architectural marvel. The structural tilt is profound, yet the temple has remained stable for centuries.",
     image_urls: [
-      "/images/huma_1.jpg",
-      "/images/huma_2.jpg",
-      "/images/huma_3.jpg"
+      "/images/huma_1.jpeg",
+      "/images/huma_2.jpeg",
+      "/images/huma_3.jpeg"
     ],
     index_score: 89,
     nearby_places: []
@@ -174,9 +174,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "Dedicated to Goddess Samaleswari (Mother of the Universe). She is the most revered deity in western Odisha after Lord Jagannath.",
     ai_summary: "Situated on the banks of the Mahanadi River, this temple holds profound religious significance across western Odisha and Chhattisgarh. The architecture and spiritual ambiance attract thousands of devotees.",
     image_urls: [
-      "/images/samleswari_1.jpg",
-      "/images/samleswari_2.jpg",
-      "/images/samleswari_3.jpg"
+      "/images/samleswari_1.jpeg",
+      "/images/samleswari_2.jpeg",
+      "/images/samleswari_3.jpeg"
     ],
     index_score: 95,
     nearby_places: []
@@ -197,9 +197,9 @@ export const MOCK_SITES: Site[] = [
     culture_notes: "The world's longest earthen dam, built across the Mahanadi River in 1957. A major multipurpose project for flood control and irrigation.",
     ai_summary: "A monumental engineering achievement of modern India. The views from the Gandhi Minar and Nehru Minar towers are spectacular, especially during the monsoon when the reservoir is full.",
     image_urls: [
-      "/images/hirakud_1.jpg",
-      "/images/hirakud_2.jpg",
-      "/images/hirakud_3.jpg"
+      "/images/hirakud_1.jpeg",
+      "/images/hirakud_2.jpeg",
+      "/images/hirakud_3.jpeg"
     ],
     index_score: 91,
     nearby_places: []
