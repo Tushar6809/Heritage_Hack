@@ -12,7 +12,7 @@ export default function Home() {
         <section className="relative w-full px-4 pb-8 pt-6 sm:px-6 md:px-8">
           <div className="mx-auto w-full max-w-7xl relative">
             {/* Hero Section */}
-            <AnimatedHero sites={MOCK_SITES} />
+            <AnimatedHero sites={MOCK_SITES.slice(0, 4)} />
 
             {/* Featured Locations Section */}
             <div className="mx-auto w-full max-w-5xl space-y-6 mt-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
@@ -21,7 +21,7 @@ export default function Home() {
                 <p className="text-foreground/60">Explore these verified historical locations</p>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {MOCK_SITES.map(site => (
+                {MOCK_SITES.slice(0, 4).map(site => (
                   <SiteCard key={site.id} site={site} />
                 ))}
               </div>
