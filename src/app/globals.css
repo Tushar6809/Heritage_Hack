@@ -1,26 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #FDFBF7; /* Cream */
+  --foreground: #2C2825; /* Soft dark brown/grey */
+  --accent: #8A9A86;     /* Soft sage green */
+  
+  --risk-green: #8A9A86;
+  --risk-yellow: #D9C589;
+  --risk-orange: #D4A373;
+  --risk-red: #C57B7B;
+  
+  --surface: #FFFFFF;
+  --surface-hover: #F4F1EB;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-accent: var(--accent);
+  --color-risk-green: var(--risk-green);
+  --color-risk-yellow: var(--risk-yellow);
+  --color-risk-orange: var(--risk-orange);
+  --color-risk-red: var(--risk-red);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  
+  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-serif: Georgia, serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base leaflet overrides for dark theme */
+.leaflet-container {
+  background-color: var(--surface) !important;
+  font-family: var(--font-sans) !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background-color: var(--surface) !important;
+  color: var(--foreground) !important;
+  border-radius: 12px !important;
+}
+
+.leaflet-popup-tip {
+  background-color: var(--surface) !important;
 }
