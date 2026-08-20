@@ -48,10 +48,17 @@ export default function RoutePlannerPage() {
       filtered = MOCK_SITES.filter(s => s.id !== startSite?.id && s.id !== endSite?.id);
     }
 
-    // 3. Shuffle
+    // 3. Geofencing: Prevent jumping 1000km away (e.g., Nashik to Odisha)
+    // If we have an anchor point, only keep intermediate sites within a 400km radius.
+    const anchor = startSite || endSite;
+    if (anchor) {
+      filtered = filtered.filter(s => getDistance(anchor.lat, anchor.lng, s.lat, s.lng) < 400);
+    }
+
+    // 4. Shuffle remaining nearby sites
     const shuffled = filtered.sort(() => 0.5 - Math.random());
 
-    // 4. Construct route array
+    // 5. Construct route array
     let selected: Site[] = [];
     if (startSite) selected.push(startSite);
     selected = [...selected, ...shuffled.slice(0, 3)];
