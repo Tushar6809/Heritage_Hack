@@ -18,10 +18,12 @@ export function LocationInput() {
           router.push(`/nearby?lat=${position.coords.latitude}&lng=${position.coords.longitude}`);
         },
         (error) => {
-          console.error("Error getting location", error);
+          console.error("Error getting location (falling back to mock)", error);
           setLoading(false);
-          alert("Could not get your location. Please select a place from the dropdown instead.");
-        }
+          // Fallback for demo purposes if permission is denied or times out
+          router.push(`/nearby?lat=20.2961&lng=85.8245`);
+        },
+        { timeout: 5000 }
       );
     } else {
       setLoading(false);
