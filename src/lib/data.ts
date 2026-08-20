@@ -102,8 +102,8 @@ export const MOCK_SITES: Site[] = [
     risk_factors: { structural: "green", environmental: "green", tourism_pressure: "yellow" },
     best_time: "November - March",
     duration: "1-2 hours",
-    culture_notes: "Built on the site where the famous Kalinga War was fought, commemorating Ashoka's mission of peace.",
-    ai_summary: "The Dhauli Shanti Stupa (Peace Pagoda) was built by the Japan Buddha Sangha in 1972. It is built on the site of the bloodiest war in Indian history, the Kalinga War, which ended with a successful mission of peace.",
+    culture_notes: "Built on the very site where the famous Kalinga War was fought in the 3rd century BC, Dhauli hill represents a major turning point in world history. It was here that Emperor Ashoka, after witnessing immense bloodshed, renounced violence and embraced Buddhism, dedicating his life to peace and dharma. The hill features ancient rock edicts where Ashoka's messages of compassion are permanently carved into stone.",
+    ai_summary: "The Dhauli Shanti Stupa (Peace Pagoda) was built by the Japan Buddha Sangha in 1972. Beyond its stunning white dome and golden statues, it stands on the banks of the Daya River—which legend says turned red with blood during the Kalinga War. Today, it serves as a global symbol of peace. Visitors consistently praise the serene atmosphere, panoramic views of the river plains, and the profound historical energy of the ancient rock edicts located just below the stupa.",
     image_urls: [
       "/images/dhauli_1.jpeg",
       "/images/dhauli_2.jpeg",

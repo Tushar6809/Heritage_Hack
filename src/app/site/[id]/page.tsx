@@ -115,31 +115,20 @@ export default async function SitePage({ params }: { params: Promise<{ id: strin
         <div className="container mx-auto px-4 sm:px-6 max-w-6xl mt-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             
-            {/* Risk Breakdown */}
-            <div className="rounded-[2rem] bg-surface p-6 md:p-8 border border-surface-hover shadow-xl">
-              <h3 className="flex items-center gap-2 font-bold text-lg mb-6">
-                <AlertTriangle className="h-5 w-5 text-foreground/60" /> Safety Score
+            {/* Safety Score Card */}
+            <div className="rounded-[2rem] bg-surface p-6 md:p-8 border border-surface-hover shadow-xl flex flex-col items-center justify-center text-center">
+              <h3 className="flex items-center gap-2 font-bold text-lg mb-2">
+                <ShieldCheck className="h-6 w-6 text-risk-green" /> Safety Score Card
               </h3>
-              <div className="flex items-center justify-between mb-6 pb-6 border-b border-surface-hover">
-                <span className="text-foreground/80">Overall Status</span>
-                <span className={`font-black text-xl uppercase ${getRiskColor(site.risk_level)}`}>
-                  {getRiskLabel(site.risk_level)}
-                </span>
+              <p className="text-foreground/60 mb-4 font-medium">For Travellers and Tourists</p>
+              <div className="text-6xl font-black text-accent my-4">
+                {site.index_score}<span className="text-2xl text-foreground/40">/100</span>
               </div>
-              <div className="space-y-4 text-sm font-medium">
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground/70">Structural condition</span>
-                  <span className={`px-2 py-1 rounded bg-background/50 ${getRiskColor(site.risk_factors.structural)}`}>{getRiskLabel(site.risk_factors.structural)}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground/70">Environmental threat</span>
-                  <span className={`px-2 py-1 rounded bg-background/50 ${getRiskColor(site.risk_factors.environmental)}`}>{getRiskLabel(site.risk_factors.environmental)}</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-foreground/70">Tourism pressure</span>
-                  <span className={`px-2 py-1 rounded bg-background/50 ${getRiskColor(site.risk_factors.tourism_pressure)}`}>{getRiskLabel(site.risk_factors.tourism_pressure)}</span>
-                </div>
-              </div>
+              <p className="text-sm font-bold text-foreground/80 mt-4 px-4">
+                {site.index_score > 85 
+                  ? 'Highly secure, well-maintained, and strongly recommended for all family visits.' 
+                  : 'Exercise standard caution when visiting. Some areas may require careful navigation.'}
+              </p>
             </div>
 
             {/* Best Time to Visit */}
