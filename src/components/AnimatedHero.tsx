@@ -82,8 +82,10 @@ export function AnimatedHero({ sites }: AnimatedHeroProps) {
         transition={{ duration: 0.8, delay: 0.7 }}
         className="mt-8 z-10 w-full flex justify-center relative"
       >
-        <div className="absolute -inset-1 bg-gradient-to-r from-accent/0 via-accent/50 to-accent/0 rounded-full blur opacity-50"></div>
-        <LocationInput />
+        <div className="absolute -inset-1 bg-gradient-to-r from-accent/0 via-accent/50 to-accent/0 rounded-full blur opacity-50 pointer-events-none -z-10"></div>
+        <div className="relative z-10 w-full flex justify-center">
+          <LocationInput />
+        </div>
       </motion.div>
     </div>
   );
