@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { Navigation, Clock, MapPin, Search } from 'lucide-react';
 import Link from 'next/link';
@@ -17,6 +17,18 @@ export default function RoutePlannerPage() {
   });
   const [routeSites, setRouteSites] = useState<Site[]>([]);
   const [totalDist, setTotalDist] = useState(0);
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        setUserLocation([pos.coords.latitude, pos.coords.longitude]);
+      }, () => {
+        // Fallback to Sambalpur if location blocked during demo
+        setUserLocation([21.4688, 83.9744]);
+      });
+    }
+  }, []);
 
   const togglePref = (key: keyof typeof preferences) => {
     setPreferences(prev => ({ ...prev, [key]: !prev[key] }));
@@ -48,34 +60,66 @@ export default function RoutePlannerPage() {
       filtered = MOCK_SITES.filter(s => s.id !== startSite?.id && s.id !== endSite?.id);
     }
 
-    // 3. Geofencing: Prevent jumping 1000km away (e.g., Nashik to Odisha)
-    // If we have an anchor point, only keep intermediate sites within a 400km radius.
-    const anchor = startSite || endSite;
-    if (anchor) {
-      filtered = filtered.filter(s => getDistance(anchor.lat, anchor.lng, s.lat, s.lng) < 400);
-    }
+    // 3. Mathematical Ellipse Geofence: 
+    // Calculate precise coordinates to strictly exclude sites that take the user on massive detours.
+    const getStartCoords = (): [number, number] => {
+      if (startSite) return [startSite.lat, startSite.lng];
+      if (startLoc.toLowerCase().includes('my location') && userLocation) return userLocation;
+      return endSite ? [endSite.lat, endSite.lng] : [20.5937, 78.9629];
+    };
+    
+    const getEndCoords = (): [number, number] => {
+      if (endSite) return [endSite.lat, endSite.lng];
+      return getStartCoords(); 
+    };
 
-    // 4. Shuffle remaining nearby sites
-    const shuffled = filtered.sort(() => 0.5 - Math.random());
+    const startCoords = getStartCoords();
+    const endCoords = getEndCoords();
+    const directDist = getDistance(startCoords[0], startCoords[1], endCoords[0], endCoords[1]);
+
+    // Keep sites that don't add more than 80km to the total trip
+    filtered = filtered.filter(s => {
+      const distToSite = getDistance(startCoords[0], startCoords[1], s.lat, s.lng);
+      const distFromSite = getDistance(s.lat, s.lng, endCoords[0], endCoords[1]);
+      return (distToSite + distFromSite) <= (directDist + 80);
+    });
+
+    // 4. Sort remaining valid sites geographically to prevent zigzagging
+    filtered.sort((a, b) => {
+      const distA = getDistance(startCoords[0], startCoords[1], a.lat, a.lng);
+      const distB = getDistance(startCoords[0], startCoords[1], b.lat, b.lng);
+      return distA - distB;
+    });
 
     // 5. Construct route array
     let selected: Site[] = [];
     if (startSite) selected.push(startSite);
-    selected = [...selected, ...shuffled.slice(0, 3)];
+    selected = [...selected, ...filtered.slice(0, 3)];
     if (endSite) selected.push(endSite);
 
-    if (selected.length === 0) selected = shuffled.slice(0, 5); // ultimate fallback
+    if (selected.length === 0) selected = filtered.slice(0, 5); // ultimate fallback
 
     setRouteSites(selected);
 
     // Calculate real distances
     let dist = 0;
+    
+    // Add distance from start location to first site if applicable
+    if (!startSite && selected.length > 0) {
+      dist += getDistance(startCoords[0], startCoords[1], selected[0].lat, selected[0].lng);
+    }
+
     for (let i = 0; i < selected.length - 1; i++) {
       dist += getDistance(selected[i].lat, selected[i].lng, selected[i+1].lat, selected[i+1].lng);
     }
     
-    // Add 15km buffer for local city traversal
-    setTotalDist(dist + 15);
+    // Add distance to end location if applicable
+    if (!endSite && selected.length > 0) {
+      dist += getDistance(selected[selected.length - 1].lat, selected[selected.length - 1].lng, endCoords[0], endCoords[1]);
+    }
+    
+    // Add minimal 5km buffer for local city traversal
+    setTotalDist(dist + 5);
     setStep(2);
   };
 
