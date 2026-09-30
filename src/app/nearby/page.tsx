@@ -38,11 +38,14 @@ function NearbyContent() {
   }, []);
 
   useEffect(() => {
+    let referencePoint = userLocation;
+    
     if (latParam && lngParam) {
       const lat = parseFloat(latParam);
       const lng = parseFloat(lngParam);
       if (!isNaN(lat) && !isNaN(lng)) {
         setCenter([lat, lng]);
+        referencePoint = [lat, lng];
       }
     } else {
       setCenter(userLocation);
@@ -50,7 +53,7 @@ function NearbyContent() {
     
     const sorted = MOCK_SITES.map(site => ({
       ...site,
-      distance: getDistance(userLocation[0], userLocation[1], site.lat, site.lng)
+      distance: getDistance(referencePoint[0], referencePoint[1], site.lat, site.lng)
     })).sort((a, b) => a.distance - b.distance);
     
     setNearbySites(sorted);

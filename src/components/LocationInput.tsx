@@ -34,10 +34,7 @@ export function LocationInput() {
   const handleSelectPlace = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const siteId = e.target.value;
     if (!siteId) return;
-    const site = MOCK_SITES.find(s => s.id === siteId);
-    if (site) {
-      router.push(`/nearby?lat=${site.lat}&lng=${site.lng}`);
-    }
+    router.push(`/site/${siteId}`);
   };
 
   return (
